@@ -79,12 +79,6 @@ class OverWorldState extends MusicBeatState
 
         currentWorld = new World1();
         loadRoom(currentWorld.getRoom("room_1"));
-
-
-        // Dev //
-
-        if (OWDebugMode)
-            player.plrHitbox.visible = true;
     }
 
     override public function update(elapsed:Float)
@@ -107,8 +101,6 @@ class OverWorldState extends MusicBeatState
         // Colisiones
         for (hb in hitbox)
             FlxG.collide(hb, player.plrHitbox);
-            if (OWDebugMode)
-                hb.visible = true;
 
         // Puertas
         for (door in doors)
@@ -136,6 +128,24 @@ class OverWorldState extends MusicBeatState
             {
                 //loadPlaySong(data.level, 7);
                 selectedLvl();
+            }
+        }
+
+
+        // Dev // (just for checking)
+
+        if (OWDebugMode) {
+            player.plrHitbox.visible = true;
+
+            for (hb in hitbox)
+            {
+                hb.visible = true;
+                hb.alpha = 0.4;
+            }
+            for (d in doors)
+            {
+                d.visible = true;
+                d.alpha = 0.4;
             }
         }
     }
@@ -166,11 +176,13 @@ class OverWorldState extends MusicBeatState
                     var hb = new FlxSprite(obj.x, obj.y);
                     hb.makeGraphic(obj.width, obj.height, 0xFF8D8D8D);
                     hb.immovable = true;
-                    if (OWDebugMode)
+                    if (OWDebugMode) {
                         hb.visible = true;
-                    else
+                        hb.alpha = 1;
+                    } else {
                         hb.visible = false;
                         hb.alpha = 0;
+                    }
                     add(hb);
                     hitbox.push(hb);
                     roomObjects.push(hb);
@@ -182,10 +194,9 @@ class OverWorldState extends MusicBeatState
                     add(d);
                     doors.push(d);
                     roomObjects.push(d);
-                    d.visible = false;
-                    if (OWDebugMode)
-                        d.visible = true;
-                        d.alpha = 1;
+                    if (!OWDebugMode) {
+                        d.visible = false; 
+                    }
                     doorTargets.set(d, {
                         room: obj.targetRoom,
                         spawnX: obj.spawnX,

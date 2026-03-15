@@ -10,7 +10,7 @@ import Paths;
 import overworld.PlayerOW;
 import overworld.World;
 
-class LevelSelectedSubState extends MusicBeatState
+class LevelSelectedSubState extends MusicBeatSubstate
 {
     var animOffsets:Map<FlxSprite, Map<String, Array<Float>>>;
     

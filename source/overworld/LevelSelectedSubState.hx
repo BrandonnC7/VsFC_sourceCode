@@ -21,7 +21,7 @@ class LevelSelectedSubState extends MusicBeatSubstate
     var curLvl:RoomData;
 
 
-    public function new() // UPDATE: NEED TO ADD THE SRITES TO MAKE IT WORK
+    public function new() // UPDATE: NEED TO ADD THE SRITES TO MAKE IT WORK (testing key)
     {
         super();
         animOffsets = new Map<FlxSprite, Map<String, Array<Float>>>();
